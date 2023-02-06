@@ -10,11 +10,15 @@ import { AdminService } from './admin.service';
 export class AuthService {
 
   private _isLoggedIn$ = new BehaviorSubject<boolean>(false);
+  private readonly TOKEN_NAME = 'token';
   isLoggedIn$ = this._isLoggedIn$.asObservable();
 
+  get token(): any {
+    return localStorage.getItem(this.TOKEN_NAME);
+  }
+
   constructor(private adminService: AdminService) {
-    const token = localStorage.getItem('token');
-    this._isLoggedIn$.next(!!token);
+    this._isLoggedIn$.next(!!this.token);
   }
 
   login(emailId: string, password: string) {
@@ -23,7 +27,7 @@ export class AuthService {
         this._isLoggedIn$.next(true);
         console.log(response)
         if(response && response.token){
-          localStorage.setItem('token', response.token);
+          localStorage.setItem(this.TOKEN_NAME, response.token);
         }else{
           alert("Something wrong")
         }
