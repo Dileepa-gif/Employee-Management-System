@@ -11,6 +11,7 @@ import { UpdateEmployeeComponent } from './update-employee/update-employee.compo
 import { EmployeeDetailsComponent } from './employee-details/employee-details.component';
 import { LoginComponent } from './login/login.component';
 import { NavigationComponent } from './navigation/navigation.component';
+import { AuthInterceptorProvider } from './auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,7 @@ import { NavigationComponent } from './navigation/navigation.component';
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [],
+  providers: [AuthInterceptorProvider],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
